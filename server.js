@@ -7,8 +7,7 @@ const server = app.listen(80, () => {
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*",
-    credentials: true,
+    origin: "https://chat-front-mu.vercel.app",
   },
 });
 io.on("connection", (socket) => {
