@@ -6,21 +6,30 @@ const errorMiddleware = require("./middlewares/error");
 const cors = require("cors");
 
 dotenv.config();
+
+// CORS middleware configuration
 app.use(
   cors({
     origin: "https://chat-front-mu.vercel.app",
     credentials: true,
   })
 );
+
+// Other middleware
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const user = require("./routes/userRoutes");
-const chat = require("./routes/chatRoutes");
-const message = require("./routes/messageRoutes");
-app.use("/api", user);
-app.use("/api", chat);
-app.use("/api/message", message);
+// Routes
+const userRoutes = require("./routes/userRoutes");
+const chatRoutes = require("./routes/chatRoutes");
+const messageRoutes = require("./routes/messageRoutes");
+
+app.use("/api", userRoutes);
+app.use("/api", chatRoutes);
+app.use("/api/message", messageRoutes);
+
+// Error middleware
 app.use(errorMiddleware);
+
 module.exports = app;
